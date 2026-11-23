@@ -48,3 +48,7 @@ docs/
 | `mostrarRed` | O(V + A) |
 
 V es el número de personas y A el de aristas guardadas (cada amistad son dos).
+
+## Informe
+
+El informe de la guía, con la secuencia de comprobación, las respuestas y las capturas, está en `docs/Informe_APE4_Fase2_GamboaRommel.pdf`.
