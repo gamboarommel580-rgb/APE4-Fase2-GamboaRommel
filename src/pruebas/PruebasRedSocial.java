@@ -11,6 +11,8 @@ public class PruebasRedSocial {
     private static int ok = 0;
     private static int total = 0;
 
+    // Suma la prueba al total e imprime OK o FALLA con su nombre para ubicarla rapido
+    // Registra un caso: suma al total y muestra OK o FALLA con el nombre del caso
     private static void verificar(String nombre, boolean condicion) {
         total++;
         if (condicion) {
@@ -46,6 +48,8 @@ public class PruebasRedSocial {
 
     // ===================== ALTAS =====================
 
+    // Alta de personas: red vacia, duplicados, usuarios invalidos e insercion al inicio
+    // Alta y busqueda: red vacia, duplicados, usuarios invalidos e insercion al inicio
     private static void probarAltas() {
         RedSocial vacia = new RedSocial();
         verificar("red vacia: estaVacia", vacia.estaVacia());
@@ -76,6 +80,8 @@ public class PruebasRedSocial {
 
     // ===================== RELACIONES =====================
 
+    // Amistad (dos aristas) y seguir (una arista): validaciones y eliminacion de los dos lados
+    // Crear y quitar relaciones: amistad en dos sentidos, seguir en uno, lazos y repetidos
     private static void probarRelaciones() {
         RedSocial r = redEjemplo();
         verificar("amistad ana - beto", r.agregarAmistad("ana", "beto"));
@@ -107,6 +113,8 @@ public class PruebasRedSocial {
 
     // ===================== BAJAS Y VECINOS =====================
 
+    // Consultas de vecinos y baja de personas limpiando las aristas que les llegaban
+    // Baja de persona y consultas: grados del ejemplo, seguidores y limpieza de referencias
     private static void probarBajasYVecinos() {
         RedSocial r = redEjemplo();
         r.agregarAmistad("caro", "dani");
