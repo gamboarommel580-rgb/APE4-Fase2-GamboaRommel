@@ -30,6 +30,7 @@ public class RedSocial {
         return usuario == null ? null : usuario.trim().toLowerCase();
     }
 
+    /** Busca a la persona por su usuario normalizado recorriendo la lista. null si no existe. O(V) */
     private Vertice buscar(String usuario) {
         String clave = normalizar(usuario);
         if (clave == null) {
@@ -43,6 +44,7 @@ public class RedSocial {
         return null;
     }
 
+    /** Un usuario sirve si no es null, no esta vacio y no tiene espacios ni comas por dentro. */
     private boolean usuarioValido(String usuario) {
         if (usuario == null || usuario.isBlank()) {
             return false;
@@ -82,6 +84,8 @@ public class RedSocial {
         return v == null ? null : v.getPersona().getNombre();
     }
 
+    /** Cuenta las personas recorriendo la lista de vertices de principio a fin. O(V) */
+    /** Cuantas personas hay; recorre la lista de vertices. O(V) */
     public int totalPersonas() {
         int n = 0;
         for (Vertice v = cabeza; v != null; v = v.getSig()) {
@@ -90,6 +94,8 @@ public class RedSocial {
         return n;
     }
 
+    /** La red esta vacia cuando la cabeza no apunta a ningun vertice. O(1) */
+    /** true si todavia no hay ninguna persona (cabeza en null). O(1) */
     public boolean estaVacia() {
         return cabeza == null;
     }
@@ -136,6 +142,8 @@ public class RedSocial {
         return null;
     }
 
+    /** Crea la arista o -> d del tipo indicado y la pone al inicio de la lista de o. O(1) */
+    /** Inserta la arista o -> d al inicio de la lista de o; no valida nada, eso lo hace quien llama. O(1) */
     private void insertar(Vertice o, Vertice d, TipoRelacion tipo) {
         Arista a = new Arista(d, tipo);
         a.setSig(o.getAristas());   //PASO 1: la nueva apunta a la primera relacion de o
@@ -196,18 +204,24 @@ public class RedSocial {
         return true;
     }
 
+    /** a deja de seguir a b. Solo quita la arista SEGUIR; si tambien son amigos, la amistad se queda. */
+    /** a deja de seguir a b; solo quita esa arista, la amistad (si existe) no se toca. O(V + grado) */
     public boolean dejarDeSeguir(String a, String b) {
         Vertice va = buscar(a);
         Vertice vb = buscar(b);
         return va != null && vb != null && quitar(va, vb, TipoRelacion.SEGUIR);
     }
 
+    /** Consulta si existe la amistad a - b. Basta revisar la lista de a porque la amistad esta en las dos. */
+    /** true si existe la arista AMISTAD a -> b (por la forma de guardar, tambien existe b -> a). */
     public boolean sonAmigos(String a, String b) {
         Vertice va = buscar(a);
         Vertice vb = buscar(b);
         return va != null && vb != null && buscarArista(va, vb, TipoRelacion.AMISTAD) != null;
     }
 
+    /** Consulta si a sigue a b. Al ser dirigida, sigueA(a, b) no dice nada de sigueA(b, a). */
+    /** true si a sigue a b. No dice nada de si b sigue a a. */
     public boolean sigueA(String a, String b) {
         Vertice va = buscar(a);
         Vertice vb = buscar(b);
@@ -297,6 +311,8 @@ public class RedSocial {
         return sb.toString();
     }
 
+    /** Cuenta las aristas de un tipo en la lista de v. Lo usan contarAmigos y los totales. */
+    // Cuenta las aristas de un tipo en la lista de v (se usa para grados y totales)
     private int contar(Vertice v, TipoRelacion tipo) {
         int n = 0;
         for (Arista a = v.getAristas(); a != null; a = a.getSig()) {
@@ -322,6 +338,8 @@ public class RedSocial {
         return n / 2;
     }
 
+    /** Cuantas relaciones de seguir hay en toda la red (cada una es una sola arista). O(V + A) */
+    /** Cuantas relaciones SEGUIR hay en toda la red; cada una esta guardada una sola vez. O(V + A) */
     public int totalSeguimientos() {
         int n = 0;
         for (Vertice v = cabeza; v != null; v = v.getSig()) {
