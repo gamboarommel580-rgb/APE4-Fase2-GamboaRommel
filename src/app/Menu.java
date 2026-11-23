@@ -12,6 +12,7 @@ public class Menu {
 
     private static final Scanner TECLADO = new Scanner(System.in);
 
+    // Muestra el menu en un ciclo y llama a la operacion de RedSocial que elija el usuario; 0 termina
     public static void main(String[] args) {
         RedSocial red = new RedSocial();
         boolean seguirEnMenu = true;
@@ -74,6 +75,8 @@ public class Menu {
         System.out.println("Fin.");
     }
 
+    // Muestra los tres tipos de vecinos de una persona: amigos, a quien sigue y quien la sigue
+    // Opcion 7: muestra amigos, a quien sigue y quien lo sigue (esta ultima recorre toda la red)
     private static void listarVecinos(RedSocial red, String usuario) {
         if (!red.existePersona(usuario)) {
             System.out.println("Ese usuario no existe");
@@ -85,10 +88,14 @@ public class Menu {
         System.out.println("Seguidores: " + vacioComoGuion(red.listarSeguidores(usuario)));
     }
 
+    // En pantalla se ve mejor un guion que una cadena vacia
+    // Para que una lista vacia se vea como "-" en pantalla
     private static String vacioComoGuion(String texto) {
         return texto == null || texto.isEmpty() ? "-" : texto;
     }
 
+    // Traduce el true/false de RedSocial a un mensaje para el usuario
+    // Imprime un mensaje segun si la operacion se hizo o fue rechazada
     private static void informar(boolean exito, String siOk, String siFalla) {
         System.out.println(exito ? siOk : siFalla);
     }
