@@ -2,12 +2,17 @@ package modelo;
 
 import enums.TipoRelacion;
 
-/** Nodo de la lista de relaciones de un vertice: hacia quien va, de que tipo y la siguiente. */
+/**
+ * Nodo de la lista de relaciones de una persona (arista del grafo).
+ * Solo guarda hacia quien va; el origen es el vertice en cuya lista esta.
+ *
+ *   [destino | tipo | sig] --> siguiente relacion de la misma persona
+ */
 public class Arista {
 
-    private final Vertice destino;
-    private final TipoRelacion tipo;
-    private Arista sig;   // null = es la ultima relacion de la lista
+    private final Vertice destino;     // persona a la que apunta la relacion
+    private final TipoRelacion tipo;   // AMISTAD o SEGUIR
+    private Arista sig;                // siguiente relacion; null si es la ultima
 
     public Arista(Vertice destino, TipoRelacion tipo) {
         this.destino = destino;
@@ -26,6 +31,7 @@ public class Arista {
         return sig;
     }
 
+    // Se cambia al insertar al inicio y cuando la arista anterior "se salta" a esta al quitar
     public void setSig(Arista sig) {
         this.sig = sig;
     }

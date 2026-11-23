@@ -1,9 +1,9 @@
 package enums;
 
 /**
- * Tipos de relacion de la red social.
- * AMISTAD es reciproca (no dirigida): se guarda como dos aristas, una en cada sentido.
- * SEGUIR va en un solo sentido (dirigida): se guarda como una sola arista.
+ * Los dos tipos de relacion que hay en la red.
+ * AMISTAD es no dirigida: se guarda como dos aristas, una en la lista de cada persona.
+ * SEGUIR es dirigida: se guarda como una sola arista, en la lista de quien sigue.
  */
 public enum TipoRelacion {
     AMISTAD,
